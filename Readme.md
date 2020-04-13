@@ -5,8 +5,8 @@
 一个类是SubPolicy，这个类里面设定了16种图片处理的方法，每个方法都在下面有详细讲解（shearX与Y算作两个）。传参是6个参数分别是（概率1，处理方式1，处理程度1，概率2，处理方式2，处理程度2），调用时会比对概率1和概率2的值并执行概率大的那个处理方式。  
 另一个一个类是ImageNetPolicy，这个类里设立了25中处理策略，每个策略对应SubPolicy的一组参数，调用时会随机选择其中的一个策略，选中之后这个策略的内容是调用SubPolicy，最终会根据这个策略中的6个参数对图像进行处理，做到了随机选择策略的目的。
 
-####图片效果：
-例如这里给出一段示例效果和代码。
+####图片效果：  
+例如这里给出一段示例效果和代码。  
 代码：
 
     def main():
@@ -24,7 +24,7 @@
 	main() 
      
 
-<img src="https://raw.githubusercontent.com/SIMONLQY/task1/master/imgs/time1.jpg" title="原图" width=300>
+<img src="./imgs/time1.jpg" title="原图" width=300>
 <img src="https://raw.githubusercontent.com/SIMONLQY/task1/master/imgs/sample.jpg" title="sample" width=300>
 
 这里可以看到随机选中的是调用autocontrast的policy
