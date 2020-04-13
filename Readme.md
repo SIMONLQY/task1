@@ -1,4 +1,34 @@
 # Autoaugment说明文档
+## 随即调用图片处理的policy的类的说明：
+#### 代码说明：
+这里设立了两个类。  
+一个类是SubPolicy，这个类里面设定了16种图片处理的方法，每个方法都在下面有详细讲解（shearX与Y算作两个）。传参是6个参数分别是（概率1，处理方式1，处理程度1，概率2，处理方式2，处理程度2），调用时会比对概率1和概率2的值并执行概率大的那个处理方式。  
+另一个一个类是ImageNetPolicy，这个类里设立了25中处理策略，每个策略对应SubPolicy的一组参数，调用时会随机选择其中的一个策略，选中之后这个策略的内容是调用SubPolicy，最终会根据这个策略中的6个参数对图像进行处理，做到了随机选择策略的目的。
+
+####图片效果：
+例如这里给出一段示例效果和代码。
+代码：
+
+    def main():
+    #定向使用sample_pairng
+    img = Image.open("./imgs/time1.jpg")
+    img2 = Image.open("./imgs/time2.jpg")
+    #img.show()
+    samp= SubPolicy(1,"sample_paring", 9,0,"rotate",9)
+    samp(img,img2).show()
+    #随机调用一个policy
+    impolicy = ImageNetPolicy()
+    impolicy(img).show()
+    
+	if __name__ == '__main__':
+	main() 
+     
+
+<img src="https://raw.githubusercontent.com/SIMONLQY/task1/master/imgs/time1.jpg" title="原图" width=300>
+<img src="https://raw.githubusercontent.com/SIMONLQY/task1/master/imgs/sample.jpg" title="sample" width=300>
+
+这里可以看到随机选中的是调用autocontrast的policy
+***
 ## 16种图片处理方法用于扩充数据集：
 ### 1.shearX/Y：图片沿着X轴/Y轴方向扭转
 #### 代码实现：
